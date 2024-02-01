@@ -1,9 +1,10 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
+    <title>Advanced Calculator</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -12,51 +13,72 @@
         }
 
         input {
-            width: 200px;
+            width: 100%;
             padding: 10px;
             margin: 10px;
-            font-size: 16px;
+            font-size: 20px;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 15px 20px;
             font-size: 16px;
             cursor: pointer;
+        }
+
+        .row::after {
+            content: '';
+            clear: both;
+            display: table;
+        }
+
+        .row button {
+            width: 20%;
+            float: left;
         }
     </style>
 </head>
 <body>
-    <h1>Simple Calculator</h1>
+    <h1>Advanced Calculator</h1>
     
     <input type="text" id="display" readonly>
 
-    <br>
+    <div class="row">
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="backspace()">←</button>
+        <button onclick="appendToDisplay('%')">%</button>
+        <button onclick="appendToDisplay('/')">/</button>
+        <button onclick="appendToDisplay('Math.sqrt(')">√</button>
+    </div>
 
-    <button onclick="clearDisplay()">C</button>
-    <button onclick="appendToDisplay('1')">1</button>
-    <button onclick="appendToDisplay('2')">2</button>
-    <button onclick="appendToDisplay('3')">3</button>
-    <button onclick="appendToDisplay('+')">+</button>
+    <div class="row">
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button onclick="appendToDisplay('*')">*</button>
+        <button onclick="appendToDisplay('Math.pow(')">x^y</button>
+    </div>
 
-    <br>
+    <div class="row">
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button onclick="appendToDisplay('-')">-</button>
+        <button onclick="appendToDisplay('(')">(</button>
+    </div>
 
-    <button onclick="appendToDisplay('4')">4</button>
-    <button onclick="appendToDisplay('5')">5</button>
-    <button onclick="appendToDisplay('6')">6</button>
-    <button onclick="appendToDisplay('-')">-</button>
+    <div class="row">
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button onclick="appendToDisplay('+')">+</button>
+        <button onclick="appendToDisplay(')')">)</button>
+    </div>
 
-    <br>
-
-    <button onclick="appendToDisplay('7')">7</button>
-    <button onclick="appendToDisplay('8')">8</button>
-    <button onclick="appendToDisplay('9')">9</button>
-    <button onclick="appendToDisplay('*')">*</button>
-
-    <br>
-
-    <button onclick="appendToDisplay('0')">0</button>
-    <button onclick="calculateResult()">=</button>
-    <button onclick="appendToDisplay('/')">/</button>
+    <div class="row">
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button onclick="calculateResult()">=</button>
+    </div>
 
     <script>
         function appendToDisplay(value) {
@@ -65,6 +87,11 @@
 
         function clearDisplay() {
             document.getElementById('display').value = '';
+        }
+
+        function backspace() {
+            var currentDisplay = document.getElementById('display').value;
+            document.getElementById('display').value = currentDisplay.slice(0, -1);
         }
 
         function calculateResult() {
